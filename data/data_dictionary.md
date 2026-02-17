@@ -76,3 +76,40 @@
 | **Size outliers** | Many | Removed |
 
 
+# Data Dictionary - Engineered Features 
+
+## New Features Created (Day 2)
+
+The following features were created during data cleaning and feature engineering:
+
+| Column Name | Description | Data Type | Example Values | Calculation |
+|------------|-------------|-----------|----------------|-------------|
+| **price_per_sqft** | Price per square foot | Float (decimal) | 12000.50, 8500.00 | `price_kes / size_sqft` |
+| **amenity_score** | Count of amenities | Integer | 0, 1, 2, 3, 4, 5 | Count commas in amenities + 1 |
+| **month** | Month from listing date | Integer | 1, 2, 3...12 | Extracted from `listing_date` |
+
+---
+
+## Feature Details
+
+### price_per_sqft
+- **Purpose:** Normalize prices by property size
+- **Use Case:** Compare value across different sized properties
+- **Typical Range:** 5,000 - 50,000 KES per sqft
+- **Missing Values:** Same as size_sqft (property has no size data)
+
+### amenity_score
+- **Purpose:** Quantify amenity richness
+- **Calculation:** "Parking, Pool, Gym" → count = 3
+- **Range:** 0 (no amenities) to 5+ (luxury properties)
+- **Use Case:** Feature for price prediction model
+
+### month
+- **Purpose:** Capture seasonal trends in pricing
+- **Range:** 1-12 (January to December)
+- **Use Case:** Identify if certain months have higher/lower prices
+
+---
+
+**Created:** February 17, 2026  
+**Used in:** Day 3+ modeling
