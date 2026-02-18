@@ -2,17 +2,17 @@
 
 **6-Day Intensive Sprint - Prop-Tech MVP**
 
-A machine learning project to predict house prices in Nairobi, Kenya using data from Nairobi Price Listings.
+A machine learning project to predict house prices in Nairobi, Kenya using data from Nairobi Propery Listings.
 
 ---
 
 ##  Project Status
 
-**Current Phase:** Day 2 Complete 
+**Current Phase:** Day 3 Complete 
 
--  Day 1: Data Collection & Structuring
--  Day 2: Data Cleaning & Feature Engineering
--  Day 3: Exploratory Analysis & Baseline Model
+-  Day 1: Data Collection & Structuring (801 listings scraped)
+-  Day 2: Data Cleaning & Feature Engineering (326 clean listings)
+-  Day 3: Baseline Model - Linear Regression (R²=0.745)
 -  Day 4: Model Improvement & Explainability
 -  Day 5: Build Pricing App (Deployment)
 -  Day 6: Dashboard & Final Presentation
@@ -20,22 +20,22 @@ A machine learning project to predict house prices in Nairobi, Kenya using data 
 ---
 
 ##  Project Structure
-
 ```
 nairobi_property/
 ├── data/
-│   ├── raw_listings.csv           # Original scraped data 
-│   ├── clean_listings.csv         # Cleaned data (ready for modeling)
+│   ├── raw_listings.csv           # Original scraped data (801 listings)
+│   ├── clean_listings.csv         # Cleaned data (326 listings)
 │   └── data_dictionary.md         # Data documentation
 ├── notebooks/
 │   ├── day1.ipynb                 # Data collection notebook
 │   ├── day2_cleaning.ipynb        # Data cleaning & feature engineering
-│   └── day2_eda.ipynb            # Exploratory data analysis
+│   ├── day2_eda.ipynb             # Exploratory data analysis
+│   └── day3_baseline_model.ipynb  # Baseline Linear Regression model
 ├── scrapping/
-│   ├── convert.py                 # Data conversion
-│   ├── read_scrapped_data.py     # HTML parser
+│   ├── convert.py                 # Data conversion utilities
+│   ├── read_scrapped_data.py      # HTML parser
 │   ├── property_scraper.py        # Main scraper
-│   └── run_scrapper.py           # Scraper runner
+│   └── run_scrapper.py            # Scraper runner
 └── README.md
 ```
 
@@ -43,13 +43,13 @@ nairobi_property/
 
 ##  Dataset Overview
 
-**Source:** Scrapping websites with property data 
+**Source:** Web Scrapping 
 **Collection Date:** February 16, 2026  
 **Raw Data:** 801 listings  
-**Clean Data:** >700 listings (after removing outliers)
+**Clean Data:** 326 listings (after removing outliers)
 
 ### Key Features:
-- **Location** - Nairobi neighborhoods 
+- **Location** - Nairobi neighborhoods (18 unique areas)
 - **Property Type** - Apartment, House, Townhouse, Villa
 - **Bedrooms** - 1-6 bedrooms
 - **Bathrooms** - 1-5 bathrooms
@@ -82,13 +82,33 @@ Top 3 by median price:
 
 ---
 
-## 🛠️ Technologies Used
+##  Model Performance (Day 3 Baseline)
+
+**Algorithm:** Linear Regression  
+**Training Data:** 260 samples (80%)  
+**Test Data:** 65 samples (20%)
+
+### Metrics:
+- **MAE:** ±9.79 Million KES
+- **RMSE:** 16.25 Million KES  
+- **R²:** 0.745 (explains 74.5% of price variance)
+
+### Key Findings:
+-  Property type is strongest predictor (+27.7M for Houses/Villas)
+-  Each bedroom adds ~14.6M KES
+-  Each sqft adds ~5,348 KES
+-  Model performs well on properties <50M KES
+-  Struggles with luxury properties (>100M KES) - to be improved in Day 4
+
+---
+
+##  Technologies Used
 
 - **Python 3.12**
 - **Data Collection:** BeautifulSoup, Requests
 - **Data Processing:** Pandas, NumPy
 - **Visualization:** Matplotlib, Seaborn
-- **Machine Learning:** Scikit-learn (upcoming)
+- **Machine Learning:** Scikit-learn (Linear Regression, upcoming: Random Forest, XGBoost)
 - **Deployment:** Streamlit (upcoming)
 
 ---
@@ -97,16 +117,16 @@ Top 3 by median price:
 
 ### 1. Clone the repository
 ```bash
-git clone <https://github.com/mwandikikepha/Nairobi_Properties>
+git clone https://github.com/mwandikikepha/Nairobi_Properties
 cd nairobi_property
 ```
 
 ### 2. Install dependencies
 ```bash
-pip install pandas numpy matplotlib seaborn requests beautifulsoup4
+pip install pandas numpy matplotlib seaborn requests beautifulsoup4 scikit-learn
 ```
 
-### 3. Run the scraper 
+### 3. Run the scraper (optional)
 ```bash
 cd scrapping
 python run_scrapper.py
@@ -116,19 +136,20 @@ python run_scrapper.py
 ```bash
 jupyter notebook notebooks/day2_cleaning.ipynb
 jupyter notebook notebooks/day2_eda.ipynb
+jupyter notebook notebooks/day3_baseline_model.ipynb
 ```
 
 ---
 
-##  Next Steps (Day 3)
+##  Next Steps (Day 4)
 
-- [ ] Train/test split
-- [ ] Build Linear Regression baseline model
-- [ ] Evaluate with MAE, RMSE, R²
-- [ ] Interpret MAE in business terms (KES)
+- [ ] Train Random Forest model
+- [ ] Train XGBoost model (if time allows)
+- [ ] Compare model performance
+- [ ] Extract feature importance
+- [ ] Improve predictions on luxury properties
 
 ---
 
 
-
-**Last Updated:** February 17, 2026
+**Last Updated:** February 18, 2026
