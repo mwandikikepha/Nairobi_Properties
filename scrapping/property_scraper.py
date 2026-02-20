@@ -41,7 +41,7 @@ def scrape_page(page_num):
     return listings
 
 
-def scrape_properties(max_pages=40, target=800):
+def scrape_properties(max_pages=200, target=2500):
     #scraping may pages
     all_listings = []
     
@@ -87,7 +87,7 @@ def save_to_csv(listings, filename='raw_listings.csv'):
 
 
 if __name__ == "__main__":
-    listings = scrape_properties(max_pages=40, target=800)
+    listings = scrape_properties(max_pages=200, target=2500)
     df = save_to_csv(listings, '../data/raw_listings.csv')
     if df is not None:
         print(df.head())

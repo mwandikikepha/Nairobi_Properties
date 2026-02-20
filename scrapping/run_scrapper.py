@@ -4,7 +4,7 @@
 from property_scraper import scrape_properties, save_to_csv
 
 # Scrape
-listings = scrape_properties(max_pages=40, target=800)
+listings = scrape_properties(max_pages=200, target=2500)
 
 # Save
 df = save_to_csv(listings, '../data/raw_listings.csv')
